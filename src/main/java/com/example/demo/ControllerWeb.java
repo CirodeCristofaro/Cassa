@@ -25,7 +25,7 @@ public class ControllerWeb {
 		return "carrelloHomepage";
 
 	}
-	
+	//creazione carrello personalizzato
 	@PostMapping(path="/home")
 	public String CartSubmit(@ModelAttribute Carrello cart,
 			@RequestParam String name, Model model ) {
@@ -36,7 +36,7 @@ public class ControllerWeb {
 		return "carrelloHomepage";
 	}
 	
-	
+	//cancella completamente il carrello 
 	@GetMapping(path = "/CancellaCarrello")
 	public String RemoveCart(@RequestParam Integer id, Model model) {
 		Carrello carrello = carrelloRepository.findById(id).get();
@@ -55,11 +55,13 @@ public class ControllerWeb {
 		model.addAttribute("carrello", carrelloRepository.findAll());
 		return "carrelloHomepage";
 	}
+	
 	@GetMapping(path = "/MostraCarrello{Id}")
 	public String ShowCartId(@RequestParam Integer id, Model model) {
 		model.addAttribute("id", id);
 		return "carrello";
 	}
+	
 	@GetMapping(path = "/MostraCarrello")
 	public String ShowCart(@RequestParam Integer id, Model model) {
 		model.addAttribute("articoliCarrello", carrelloRepository.findById(id).get().getQuantitaComprata());
@@ -69,7 +71,7 @@ public class ControllerWeb {
 		return "carrello";
 
 	}
-	
+	//aggiunge un articolo al carrello
 	@GetMapping(path = "/AggiungiAlCarrello{id_article}{id_cart}")
 	public String AddToCart(@RequestParam Integer id_article, @RequestParam Integer id_cart, Model model) {
 		Carrello n = carrelloRepository.findById(id_cart).get();
@@ -83,8 +85,8 @@ public class ControllerWeb {
 				flag = 1;
 			}
 		}
-
-		if (flag == 0) {
+		
+		if (flag == 0) {//se non è presente allora è la prima volta che inserisco l'articolo nel carrello
 			qic.setArticoliCarrello(a);
 			qic.setCartbuyer(n);
 			qic.setQuantita(1);
@@ -99,7 +101,7 @@ public class ControllerWeb {
 		model.addAttribute("articoli", articoliRepository.findAll());
 		return "carrello";
 	}
-
+	
 	@GetMapping(path="/CancellaCarrelloArticolo")
 	public String CancellaCarrello(@RequestParam Integer id_cart, @RequestParam Integer id_article, Model model) {
 		Carrello c = carrelloRepository.findById(id_cart).get();
