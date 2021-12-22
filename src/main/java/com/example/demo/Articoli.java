@@ -38,16 +38,7 @@ public class Articoli {
 		this.price = price;
 	}
 	
-//	@ManyToMany(mappedBy = "boughtarticle")
-//	Set<Cart> cartbuyer;
-//
-//	public Set<Cart> getCartbuyer() {
-//		return cartbuyer;
-//	}
-//	public void setCartbuyer(Set<Cart> cartbuyer) {
-//		this.cartbuyer = cartbuyer;
-//	}
-	
+
 	@OneToMany(cascade = CascadeType.ALL  )
 	private Set<Quantita> carrello;
 
