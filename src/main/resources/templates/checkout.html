@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Checkout</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<body style="background-color:lemonchiffon">
+  
+<nav class="navbar navbar-dark bg-dark">
+  <a href="/"><span class="navbar-brand mb-0 h1">HOME</span></a>
+</nav>
+	<p>  </p>
+	<h3  align="center" th:text="'Carrello: '+${carrelloAcquirente}"></h3>
+<p>  </p>
+	<h4>Riepilogo</h4>
+	<table class="table table-bordered">
+		<tr>
+			<th>Articolo</th>
+			<th>Quantita'</th>
+			<th>Prezzo</th>
+			
+		</tr>
+		<tr th:each="articoli : ${articoliCarrello}">
+			<td th:text="${articoli.articoliCarrello.name}" /></td>
+			<td th:text="${articoli.quantita}" /></td>
+			<td th:text="${articoli.articoliCarrello.price}+' €'" /></td> 
+		</tr>
+		<tr>
+		    <th>Totale provvisorio</th>
+		    <th></th>
+		    <th th:text="${sommaCarelloTotale}+' €'"/></th>
+	    </tr>
+	</table>
+		    <table class="table table-bordered">
+	    <tr>
+			<th>Torna al carrello</th>
+			<th>Procedi al pagamento</th>
+		</tr>
+	    <tr>
+			<td><a th:href="@{/MostraCarrello(id=${carrelloAcquirenteId})}"><button class="btn btn-warning">Indietro</button></a></td>
+			<td><a href="https://www.paypal.com/it/signin"><button class="btn btn-dark">Paga ora</button></a></td>
+		</tr>
+	</table> 
+</body>
+</html>

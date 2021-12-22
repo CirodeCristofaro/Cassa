@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Magazzino</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<body style="background-color:lemonchiffon">
+  
+<nav class="navbar navbar-dark bg-dark">
+  <a href="/"><span class="navbar-brand mb-0 h1">HOME</span></a>
+</nav>
+    <form action="#" th:action="@{/Shop}" th:object="${articoli}" method="post">
+    <div class="form-group">
+        	<label>Nome nuovo articolo:</label>
+    	    <input class="form-control" placeholder="Inserisci nome articolo" type="text" id="name" name="name" required />
+    	    <label>Prezzo nuovo articolo:</label>
+    	    <input class="form-control" placeholder="Inserisci prezzo articolo" type="number" min="0.01" step="0.01" id="price" name="price" required/>
+    </div>
+        <p><button class="btn btn-success" type="submit" name="register">Aggiungi</button> </p>
+    </form>
+<h4>Lista articoli:</h4>    
+    <table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+    	<th>Nome</th>
+    	<th>Prezzo</th>
+    	<th>Elimina prodotto</th>
+    </tr>	
+    <tr th:each="articolo: ${articoli}">
+    	<td th:text="${articolo.id}" /></td>
+    	<td th:text="${articolo.name}" /></td>
+    	<td th:text="${articolo.price}+' €'" /></td>
+    	<td><a th:href="@{/CancellaArticolo(id=${articolo.id})}" method="get"><button class="btn btn-danger" >Elimina</button></a></td>   
+    </tr>
+    </table>
+</body>
+</html>

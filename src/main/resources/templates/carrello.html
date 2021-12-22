@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Carrello</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<body style="background-color:lemonchiffon">
+  
+<nav class="navbar navbar-dark bg-dark">
+  <a href="/"><span class="navbar-brand mb-0 h1">HOME</span></a>
+</nav> 
+<br>
+	<h3  align="center" th:text="'Carrello: '+${carrelloAcquirente}"></h3>
+
+	<h4>Articoli presenti:</h4>
+	<table class="table table-bordered">
+		<tr>
+			
+			<th>Nome</th>
+			<th>Prezzo</th>
+			<th>Quantita'</th>
+			<th>Elimina dal carrello</th>
+		</tr>
+		<tr th:each="articoli : ${articoliCarrello}">
+			<td th:text="${articoli.articoliCarrello.name}" /></td>
+			<td th:text="${articoli.articoliCarrello.price}+' €'" /></td> 
+			<td th:text="${articoli.quantita}" /></td>
+		    <td><a th:href="@{/CancellaCarrelloArticolo(id_article=${articoli.articoliCarrello.id},id_cart=${carrelloAcquirenteId})}"><button class="btn btn-danger">Elimina</button></a></td>
+	    </tr>
+	    </table>
+	    
+	    <table class="table table-bordered">
+	    <tr>
+			<th>Torna alla lista carrelli</th>
+			<th>Procedi all'ordine</th>
+		</tr>
+	    <tr>
+			<td><a href="/home"><button class="btn btn-warning">Carrelli</button></a></td>
+			<td><a th:href="@{/Checkout(id_cart=${carrelloAcquirenteId})}"><button class="btn btn-warning">Cassa</button></a></td>
+		</tr>
+	    </table>  
+	<h4>Lista articoli:</h4>    
+    <table class="table table-bordered">		
+		<tr>
+			
+			<th>Nome</th>
+			<th>Prezzo</th>
+			<th>Aggiungi al carrello</th>
+		</tr>
+		<tr th:each="articolo : ${articoli}">
+			<td th:text="${articolo.name}" /></td>
+			<td th:text="${articolo.price}+' €'" /></td>
+			<td><a th:href="@{/AggiungiAlCarrello(id_article=${articolo.id},id_cart=${carrelloAcquirenteId})}"><button class="btn btn-success">Aggiungi</button></a></td>
+		</tr>
+	</table>
+</body>
+</html>

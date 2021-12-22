@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Home</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<body style="background-color:lemonchiffon">
+  
+<nav class="navbar navbar-dark bg-dark">
+  <a href="/"><span class="navbar-brand mb-0 h1">HOME</span></a>
+</nav>
+    <form action="#" th:action="@{/home}" th:object="${carrello}" method="post">
+    <div class="form-group">
+    	<label>Nome nuovo carrello:</label>
+    	<input class="form-control" placeholder="Inserisci nome carrello" type="text" id="name" name="name" required />
+    </div>
+        <button class="btn btn-success" type="submit" name="register">Aggiungi</button>
+    </form>
+<h4>Lista carrelli:</h4>
+    <table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+    	<th>Nome</th>
+    	<th>Elimina carrello</th>
+    	<th>Mostra carrello</th>
+    </tr>	
+    <tr th:each="carrello: ${carrello}">
+    <td th:text="${carrello.id}" /></td>
+    	<td th:text="${carrello.name}" /></td>
+    	<td><a th:href="@{/CancellaCarrello(id=${carrello.id})}" method="get"><button class="btn btn-danger">Elimina</button></a></td>
+    	<td><a th:href="@{/MostraCarrello(id=${carrello.id})}" method="get"><button class="btn btn-warning">Mostra</button></a></td>    
+    </tr>
+    </table> 
+</body>
+</html>
